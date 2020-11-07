@@ -26,34 +26,61 @@ var questions = [{
     correctAnswer: 3
 }]
 
-document.ready(function() 
-{
- displayCurrentQuestion();
-(this).find(".message").hide();
-(this).find(".lastButton").attr('disabled', 'disabled');
+function displayQuestion(index) {
+    console.log(questions[index].question);
+    document.getElementById('question').innerHTML = questions[index].question;
+}
 
-timedCount();
-
-(this).find(".lastButton").on("click", function () 
-{		
-    
-    if (!final) 
-    {
-        if(now == 0) { return false; }
-
-        if(now == 0) {
-          (".preButton").attr('disabled', 'disabled');
-        }
-        
-            now--;
-            if (now < questions.length) 
-            {
-                displayCurrentQuestion();
-                
-            } 					
-    } else {
-        if(view == 3) { return false; }
-        now = 0; view = 3;
-        viewResults();		
+function displayChoices(index) {
+    let id = 'choice';
+    for (let i = 0; i < 4; i++) {
+        let newID = id + String((i+1));
+        document.getElementById(newID).innerHTML = questions[index].choices[i];
     }
-}) 
+}
+
+displayQuestion(0);
+
+// var count = 15;
+// var interval = setInterval(function(){
+//   document.getElementById('count').innerHTML=count;
+//   count--;
+//   if (count === 0){
+//     clearInterval(interval);
+//     document.getElementById('count').innerHTML='Done';
+//     // or...
+//     alert("You're out of time!");
+//   }
+// }, 1000);
+
+// document.ready(function() 
+// {
+//  displayCurrentQuestion();
+// (this).find(".message").hide();
+// (this).find(".lastButton").attr('disabled', 'disabled');
+
+// timedCount();
+
+// (this).find(".lastButton").on("click", function () 
+// {		
+    
+//     if (!final) 
+//     {
+//         if(now == 0) { return false; }
+
+//         if(now == 0) {
+//           (".preButton").attr('disabled', 'disabled');
+//         }
+        
+//             now--;
+//             if (now < questions.length) 
+//             {
+//                 displayCurrentQuestion();
+                
+//             } 					
+//     } else {
+//         if(view == 3) { return false; }
+//         now = 0; view = 3;
+//         viewResults();		
+//     }
+// }) 
