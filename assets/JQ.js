@@ -85,10 +85,10 @@ function scoreRender(){
  
     const scorePerCent = Math.round(100 * score/questions.length);
 
-    let img = (scorePerCent >= 80) ? "BACK.jpg" :
-              (scorePerCent >= 60) ? "BACK.jpg" :
-              (scorePerCent >= 40) ? "BACK.jpg" :
-              (scorePerCent >= 20) ? "BACK.jpg" :
+    let img = (scorePerCent >= 80) ? "assets/images/BACK.jpg" :
+              (scorePerCent >= 60) ? "assets/images/BACK.jpg" :
+              (scorePerCent >= 40) ? "assets/images/BACK.jpg" :
+              (scorePerCent >= 20) ? "assets/images/BACK.jpg" :
               "img/1.png";
     scoreFinal.innerHTML = "<img src="+ img +">";
     scoreFinal.innerHTML += "<p>"+ scorePerCent +"%</p>";
