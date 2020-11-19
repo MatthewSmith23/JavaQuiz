@@ -1,28 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JavaQuiz</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>JavaQuiz</title>
+</head>
+
 <body>
-  <div>
-    <h3>Time Remaining:</h3>
-    <h1>Bubba's JavaQuiz</h1>
-    <center><img src="https://wallpaperaccess.com/full/1129388.jpg" height="200" width="300"></center>
-    <h2>PceLuvChunk</h2>
+  <div id="style">
+    <div id="begin">Bubba's JavaQuiz</div>
+    <div id="quiz" style="display: none">
+      <div id="question"></div>
+      <div id="answers">
+        <div class="answer" id="A" onclick="checkAnswer('A')"></div>
+        <div class="answer" id="B" onclick="checkAnswer('B')"></div>
+        <div class="answer" id="C" onclick="checkAnswer('C')"></div>
+        <div class="answer" id="D" onclick="checkAnswer('D')"></div>
+      </div>
     </div>
+    <div id="Final" style="display: none"></div>
+  </div>
 
-    <div class="questions"></div>
-    <ul class="choices"></ul>
-    <div class="message"></div>
-    <div class="final"></div>
-    <button class="lastButton">Last Question</button>
-    <button class="nextButton">Next Question</button>
+  <div>Time left = <span id="timer"></span></div>
 
-    <h2 id='question' style="margin-top:125px;"></h2>
-    <h4 id='choice1' style="margin-top: 125px;"></h4>
-</div>
-<script src = "JQ.js"></script>
+
+
+  <p id="demo"></p>
+
+
+
+<script src="JQ.js"></script>
 </body>
+
 </html>
+
+

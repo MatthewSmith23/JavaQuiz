@@ -1,86 +1,119 @@
-var now = 0;
-var view = 0;
-var rightAnswer = 0;
-var final = false; 
-var selected = [];
-var questions = [{
-    
-    question: "1. What is my Youtube name?",
-    choices: ["itschunk", "Chunkyymonkey;", "Bubba", "DannyDuncan"],
-    correctAnswer: 0
-}, {
-    question: "2. What is my favorite season?",
-    choices: ["summer", "spring", "fall", "winter"],
-    correctAnswer: 2
-}, {
-    question: "3. My favorite holiday is .. ? ",
-    choices: ["Halloween", "Easter", "Thanksgiving", "Christmas"],
-    correctAnswer: 3
-}, {
-    question: "4. Which truck did I just sell?",
-    choices: ["Chevy", "Ford", "GMC", "Jeep"],
-    correctAnswer: 1
-}, {
-    question: "5. Who is my favorite country singer?",
-    choices: ["Gunna", "Jason Aldean", "Lil pump", "Luke Combs"],
-    correctAnswer: 3
-}]
+var start = document.getElementById("begin");
+var quiz = document.getElementById("quiz");
+var question = document.getElementById("question");
+var choiceA = document.getElementById("A");
+var choiceB = document.getElementById("B");
+var choiceC = document.getElementById("C");
+var choiceD = document.getElementById("D");
+var scoreFinal = document.getElementById("Final");
 
-function displayQuestion(index) {
-    console.log(questions[index].question);
-    document.getElementById('question').innerHTML = questions[index].question;
+let questions = [
+    {
+        question: "1. What is my Youtube name?",
+        choiceA: "Danny Duncan",
+        choiceB: "Chunkyymonkey",
+        choiceC: "Bubba",
+        choiceD: "itschunk",
+        correct: "D"
+    }, {
+        question: "2. What is my favorite season?",
+        choiceA: "Summer",
+        choiceB: "Spring",
+        choiceC: "Fall",
+        choiceD: "Winter",
+        correct: "C"
+    }, {
+        question: "3. My favorite holiday is .. ? ",
+        choiceA: "Christmas",
+        choiceB: "Thanksgiving",
+        choiceC: "Halloween",
+        choiceD: "Easter",
+        correct: "A"
+    }, {
+        question: "4. Which truck did I just sell?",
+        choiceA: "Chevy",
+        choiceB: "Ford",
+        choiceC: "Jeep",
+        choiceD: "GMC",
+        correct: "B"
+    }, {
+        question: "5. Who is my favorite country singer?",
+        choiceA: "Gunna",
+        choiceB: "Luke Combs",
+        choiceC: "Jason Aldean",
+        choiceD: "Lil Pump",
+        correct: "B"
+    }
+];
+
+const lastQuestion = questions.length - 1;
+let runningquestion = 0;
+let count = 0;
+let score = 0;
+start.addEventListener("click", startQuiz);
+function startQuiz() {
+    start.style.display = "none";
+    renderQuestion();
+    quiz.style.display = "block";
 }
 
-function displayChoices(index) {
-    let id = 'choice';
-    for (let i = 0; i < 4; i++) {
-        let newID = id + String((i+1));
-        document.getElementById(newID).innerHTML = questions[index].choices[i];
+function renderQuestion() {
+    let quest = questions[runningquestion];
+    question.innerHTML = "<p>" + quest.question + "</p>";
+    choiceA.innerHTML = quest.choiceA
+    choiceB.innerHTML = quest.choiceB
+    choiceC.innerHTML = quest.choiceC
+    choiceD.innerHTML = quest.choiceD
+}
+
+function checkAnswer(answer) {
+    if (answer == questions[runningquestion].correct) {
+        score++;
+    }
+    count = 0;
+    if(runningquestion < lastQuestion) {
+        runningquestion++;
+        renderQuestion();
+    }
+    else {
+        scoreRender();
     }
 }
 
-displayQuestion(0);
+function scoreRender(){
+    scoreFinal.style.display = "block";
+ 
+    const scorePerCent = Math.round(100 * score/questions.length);
 
-// var count = 15;
-// var interval = setInterval(function(){
-//   document.getElementById('count').innerHTML=count;
-//   count--;
-//   if (count === 0){
-//     clearInterval(interval);
-//     document.getElementById('count').innerHTML='Done';
-//     // or...
-//     alert("You're out of time!");
-//   }
-// }, 1000);
+    let img = (scorePerCent >= 80) ? "BACK.jpg" :
+              (scorePerCent >= 60) ? "BACK.jpg" :
+              (scorePerCent >= 40) ? "BACK.jpg" :
+              (scorePerCent >= 20) ? "BACK.jpg" :
+              "img/1.png";
+    scoreFinal.innerHTML = "<img src="+ img +">";
+    scoreFinal.innerHTML += "<p>"+ scorePerCent +"%</p>";
+}
 
-// document.ready(function() 
-// {
-//  displayCurrentQuestion();
-// (this).find(".message").hide();
-// (this).find(".lastButton").attr('disabled', 'disabled');
+document.getElementById('timer').innerHTML =
+  005 + ":" + 01;
+startTimer();
 
-// timedCount();
+function startTimer() {
+  var presentTime = document.getElementById('timer').innerHTML;
+  var timeArray = presentTime.split(/[:]+/);
+  var m = timeArray[0];
+  var s = checkSecond((timeArray[1] - 1));
+  if(s==59){m=m-1}
 
-// (this).find(".lastButton").on("click", function () 
-// {		
-    
-//     if (!final) 
-//     {
-//         if(now == 0) { return false; }
+  
+  document.getElementById('timer').innerHTML =
+    m + ":" + s;
+  console.log(m)
+  setTimeout(startTimer, 1000);
+}
 
-//         if(now == 0) {
-//           (".preButton").attr('disabled', 'disabled');
-//         }
-        
-//             now--;
-//             if (now < questions.length) 
-//             {
-//                 displayCurrentQuestion();
-                
-//             } 					
-//     } else {
-//         if(view == 3) { return false; }
-//         now = 0; view = 3;
-//         viewResults();		
-//     }
-// }) 
+function checkSecond(sec) {
+  if (sec < 10 && sec >= 0) {sec = "0" + sec};
+  if (sec < 0) {sec = "59"};
+  return sec;
+}
