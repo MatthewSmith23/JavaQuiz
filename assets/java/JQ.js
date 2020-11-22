@@ -71,7 +71,7 @@ function checkAnswer(answer) {
         score++;
     }
     count = 0;
-    if(runningquestion < lastQuestion) {
+    if (runningquestion < lastQuestion) {
         runningquestion++;
         renderQuestion();
     }
@@ -80,40 +80,41 @@ function checkAnswer(answer) {
     }
 }
 
-function scoreRender(){
+function scoreRender() {
     scoreFinal.style.display = "block";
- 
-    const scorePerCent = Math.round(100 * score/questions.length);
+
+    const scorePerCent = Math.round(100 * score / questions.length);
 
     let img = (scorePerCent >= 80) ? "assets/images/BACK.jpg" :
-              (scorePerCent >= 60) ? "assets/images/BACK.jpg" :
-              (scorePerCent >= 40) ? "assets/images/BACK.jpg" :
-              (scorePerCent >= 20) ? "assets/images/BACK.jpg" :
-              "img/1.png";
-    scoreFinal.innerHTML = "<img src="+ img +">";
-    scoreFinal.innerHTML += "<p>"+ scorePerCent +"%</p>";
+        (scorePerCent >= 60) ? "assets/images/BACK.jpg" :
+            (scorePerCent >= 40) ? "assets/images/BACK.jpg" :
+                (scorePerCent >= 20) ? "assets/images/BACK.jpg" :
+                    (scorePerCent >= 0) ? "assets/images/BACK.jpg" :
+                        "img/1.png";
+    scoreFinal.innerHTML = "<img src=" + img + ">";
+    scoreFinal.innerHTML += "<p>" + scorePerCent + "%</p>";
 }
 
 document.getElementById('timer').innerHTML =
-  005 + ":" + 01;
+    005 + ":" + 01;
 startTimer();
 
 function startTimer() {
-  var presentTime = document.getElementById('timer').innerHTML;
-  var timeArray = presentTime.split(/[:]+/);
-  var m = timeArray[0];
-  var s = checkSecond((timeArray[1] - 1));
-  if(s==59){m=m-1}
+    var presentTime = document.getElementById('timer').innerHTML;
+    var timeArray = presentTime.split(/[:]+/);
+    var m = timeArray[0];
+    var s = checkSecond((timeArray[1] - 1));
+    if (s == 59) { m = m - 1 }
 
-  
-  document.getElementById('timer').innerHTML =
-    m + ":" + s;
-  console.log(m)
-  setTimeout(startTimer, 1000);
+
+    document.getElementById('timer').innerHTML =
+        m + ":" + s;
+    console.log(m)
+    setTimeout(startTimer, 1000);
 }
 
 function checkSecond(sec) {
-  if (sec < 10 && sec >= 0) {sec = "0" + sec};
-  if (sec < 0) {sec = "59"};
-  return sec;
+    if (sec < 10 && sec >= 0) { sec = "0" + sec };
+    if (sec < 0) { sec = "59" };
+    return sec;
 }
